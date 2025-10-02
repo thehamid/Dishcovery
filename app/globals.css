@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+   --background: #ffffff;
+  --foreground: #171717;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+body {
+  color: var(--foreground);
+  background:var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+       
+    .marque-container .Marquee-content {
+         animation: marquee 40s linear infinite running;
+    }
+    .marque-container .Marquee-content:hover {
+         animation-play-state: paused;
+    }
+     @-moz-keyframes marquee {
+         0% {
+             transform: translateX(0);
+        }
+         100% {
+             transform: translate(-50%);
+        }
+    }
+     @-webkit-keyframes marquee {
+         0% {
+             transform: translateX(0);
+        }
+         100% {
+             transform: translate(-50%);
+        }
+    }
+     @-o-keyframes marquee {
+         0% {
+             transform: translateX(0);
+        }
+         100% {
+             transform: translate(-50%);
+        }
+    }
+     @keyframes marquee {
+         0% {
+             transform: translateX(0);
+        }
+         100% {
+             transform: translate(-50%);
+        }
+    }

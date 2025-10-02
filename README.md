@@ -31,8 +31,8 @@ A modern, responsive recipe search application built with Next.js 15.5, Redux To
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/recipe-search-app.git
-    cd recipe-search-app
+    git clone https://github.com/thehamid/dishcovery.git
+    cd dishcovery
     ```
 
 2. **Install dependencies:**

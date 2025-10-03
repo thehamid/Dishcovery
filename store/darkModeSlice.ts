@@ -4,30 +4,8 @@ interface DarkModeState {
   isDarkMode: boolean;
 }
 
-const loadState = (): boolean => {
-  try {
-    const serializedState = localStorage.getItem("isDarkMode");
-    if (serializedState === null) {
-      return false; // پیش‌فرض: حالت روشن
-    } 
-    return JSON.parse(serializedState);
-  } catch (err) {
-    console.error("خطا در خواندن حالت تاریک:", err);
-    return false;
-  }
-};
-
-const saveState = (state: boolean) => {
-  try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem("isDarkMode", serializedState);
-  } catch (err) {
-    console.error("خطا در ذخیره حالت تاریک:", err);
-  }
-};
-
 const initialState: DarkModeState = {
-  isDarkMode: loadState(),
+  isDarkMode: false, 
 };
 
 export const darkModeSlice = createSlice({
@@ -36,17 +14,27 @@ export const darkModeSlice = createSlice({
   reducers: {
     toggleDarkMode: (state) => {
       state.isDarkMode = !state.isDarkMode;
-      saveState(state.isDarkMode);
+      // ذخیره در localStorage فقط در کلاینت
+      if (typeof window !== "undefined") {
+        localStorage.setItem("isDarkMode", JSON.stringify(state.isDarkMode));
+        if (state.isDarkMode) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      }
+    },
+    loadDarkMode: (state, action: PayloadAction<boolean>) => {
+      state.isDarkMode = action.payload;
       if (state.isDarkMode) {
         document.documentElement.classList.add("dark");
       } else {
         document.documentElement.classList.remove("dark");
       }
     },
-  
   },
 });
 
-export const { toggleDarkMode } = darkModeSlice.actions;
+export const { toggleDarkMode, loadDarkMode } = darkModeSlice.actions;
 
 export default darkModeSlice.reducer;

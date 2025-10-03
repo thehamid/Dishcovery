@@ -61,4 +61,4 @@ A modern, responsive recipe search application built with Next.js 15.5, Redux To
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 📁 Project Structure
+

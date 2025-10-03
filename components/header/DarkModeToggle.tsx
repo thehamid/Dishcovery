@@ -21,7 +21,7 @@ const DarkModeToggle = () => {
   }, [isDarkMode]);
 
   if (!mounted) {
-    return null; // تا زمان Mount شدن، چیزی نشان نده
+    return null; 
   }
 
   return (

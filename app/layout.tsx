@@ -16,7 +16,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dishcovery",
+    title: {
+    template: "Dishcovery | %s",
+    default: " Dishcovery | Recipe Search app ",
+  },
   description: "Recipe Food Hub",
 };
 

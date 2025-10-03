@@ -1,35 +1,47 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+// تعریف ساختار یک بوکمارک
+interface BookmarkItem {
+  id: number;
+  name: string;
+  imageUrl: string;
+}
+
 interface BookmarkState {
-  ids: number[];
+  items: BookmarkItem[];
 }
 
 const initialState: BookmarkState = {
-  ids: [],
+  items: [],
 };
 
 const bookmarkSlice = createSlice({
   name: "bookmarks",
   initialState,
   reducers: {
-    toggleBookmark: (state, action: PayloadAction<number>) => {
-      const id = action.payload;
-      if (state.ids.includes(id)) {
-        state.ids = state.ids.filter((item) => item !== id);
+    toggleBookmark: (state, action: PayloadAction<BookmarkItem>) => {
+      const item = action.payload;
+      const existingIndex = state.items.findIndex(bookmark => bookmark.id === item.id);
+
+      if (existingIndex >= 0) {
+        // حذف از بوکمارک‌ها
+        state.items.splice(existingIndex, 1);
       } else {
-        state.ids.push(id);
+        // اضافه کردن به بوکمارک‌ها
+        state.items.push(item);
       }
       // ذخیره در لوکال استوریج
-      localStorage.setItem("bookmarks", JSON.stringify(state.ids));
+      localStorage.setItem("bookmarks", JSON.stringify(state.items));
     },
-    loadBookmarks: (state, action: PayloadAction<number[]>) => {
-      state.ids = action.payload;
+    loadBookmarks: (state, action: PayloadAction<BookmarkItem[]>) => {
+      state.items = action.payload;
     },
   },
 });
 
 export const { toggleBookmark, loadBookmarks } = bookmarkSlice.actions;
 
-export const selectBookmarks = (state: { bookmarks: BookmarkState }) => state.bookmarks.ids;
+// انتخاب همه آیتم‌های بوکمارک
+export const selectBookmarks = (state: { bookmarks: BookmarkState }) => state.bookmarks.items;
 
 export default bookmarkSlice.reducer;

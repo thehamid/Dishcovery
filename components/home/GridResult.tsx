@@ -1,12 +1,7 @@
 import Loading from "../elements/Loading";
 import RecipeCard from "./RecipeCard";
+import { Recipe } from "@/types";
 
-interface Recipe {
-  id: number;
-  title: string;
-  image: string;
-  summary?: string;
-}
 
 interface GridResultProps {
   recipes: Recipe[];
@@ -33,10 +28,12 @@ const GridResult = ({ recipes, loading, error, hasSearched }: GridResultProps) =
   }
 
   return (
+    <div className="container mx-auto">
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-2 md:p-6">
       {recipes.map((recipe) => (
         <RecipeCard key={recipe.id} recipe={recipe} />
       ))}
+    </div>
     </div>
   );
 };

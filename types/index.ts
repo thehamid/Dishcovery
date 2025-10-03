@@ -2,8 +2,7 @@ export interface Recipe {
   id: number;
   title: string;
   image: string;
-  cookingMinutes?: number;
-  readyInMinutes?: number;
+  summary?: string;
 }
 
 export interface RecipeDetail {
